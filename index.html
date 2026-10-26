@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas Interativo do Corpo Humano</title>
+<style>
+:root{--bg:#0b1220;--panel:#121e31;--panel2:#182740;--text:#eef5ff;--muted:#a8bad3;--line:#2b405d;--accent:#66e0cf;--blue:#7eb5ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172b48,#0b1220 65%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{padding:26px 18px 20px;text-align:center;border-bottom:1px solid var(--line)}header h1{font-size:clamp(1.6rem,4vw,2.6rem);margin:0}header p{color:var(--muted);margin:7px 0 0}.wrap{max-width:1250px;margin:auto;padding:16px;display:grid;grid-template-columns:minmax(290px,1fr) minmax(300px,1fr);gap:16px}.panel{background:linear-gradient(160deg,#15243a,#101a2a);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 14px 35px #0002}.wide{grid-column:1/-1}h2{font-size:1.12rem;margin:0 0 8px}.muted{color:var(--muted)}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.btn,button,select,input{font:inherit}.btn,button{border:1px solid #395473;background:#203653;color:var(--text);border-radius:10px;padding:9px 12px;cursor:pointer}.btn.active,button.primary{background:var(--accent);border-color:var(--accent);color:#07201e;font-weight:800}button:hover,.btn:hover{filter:brightness(1.12)}button:focus-visible,.btn:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}.bodybox{display:grid;grid-template-columns:1fr;place-items:center;background:#0b1626;border:1px solid var(--line);border-radius:14px;min-height:390px;overflow:hidden}svg{width:min(100%,420px);height:auto;max-height:600px}.part{cursor:pointer;stroke:#e5efff;stroke-width:1.6;transition:filter .15s}.part:hover,.part:focus,.part.sel{stroke:#fff;stroke-width:3;filter:drop-shadow(0 0 5px #66e0cf);outline:none}.part{opacity:.93}.note{font-size:.86rem;color:var(--muted)}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.filters select,.filters input{background:#0b1626;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px;min-width:0}.filters input{flex:1;min-width:140px}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.chip{font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:4px 9px;color:#d4e7ff}.tag{color:#082321;background:var(--accent);display:inline-block;padding:3px 9px;border-radius:99px;font-size:.77rem;font-weight:800;margin-bottom:7px}.detail h3{font-size:1.55rem;margin:0 0 5px}.detail p{margin:8px 0}.detail ul{padding-left:20px}.detail li{margin:5px 0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{background:#0c1727;border:1px solid var(--line);padding:10px;border-radius:12px}.stat strong{display:block;font-size:1.3rem;color:var(--accent)}.catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:9px}.item{padding:12px;border:1px solid var(--line);border-radius:12px;background:#0c1727;text-align:left}.item strong{display:block}.item small{color:var(--muted)}.systems{display:flex;flex-wrap:wrap;gap:7px}.systembtn{border-radius:999px;padding:7px 10px}.quizgrid{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.answers button{text-align:left;background:#0b1728}.answers button.good{background:#145c4f;border-color:#55d8b4}.answers button.bad{background:#6b2936;border-color:#ff889a}.feedback{min-height:25px;color:var(--accent);margin:10px 0}.progress{height:7px;background:#263a55;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;background:var(--accent);width:0}.footer{text-align:center;color:var(--muted);padding:0 15px 28px;font-size:.82rem}
+@media(max-width:760px){.wrap{grid-template-columns:1fr;padding:10px}.wide{grid-column:auto}.bodybox{min-height:300px}.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:420px){.answers{grid-template-columns:1fr}.panel{padding:12px}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><h1>🧬 Atlas Interativo do Corpo Humano</h1><p>Explore órgãos, sistemas, funções e estruturas — uma ferramenta educativa para estudar biologia.</p></header>
+<div class="wrap">
+<section class="panel">
+<h2>🧍 Mapa anatômico simplificado</h2><div class="muted">Escolha uma camada e toque numa estrutura colorida.</div>
+<div class="toolbar" id="layers"></div>
+<div class="bodybox">
+<svg viewBox="0 0 340 510" role="img" aria-label="Mapa esquemático e interativo do corpo humano">
+<!-- Silhueta -->
+<circle cx="170" cy="51" r="31" fill="#b8c8d9" stroke="#dce8f4" stroke-width="2"/>
+<path d="M151 80 L151 95 Q117 96 101 119 L78 210 Q75 226 89 228 Q101 229 106 212 L125 155 L119 265 L221 265 L215 155 L234 212 Q239 229 251 228 Q265 226 262 210 L239 119 Q223 96 189 95 L189 80Z" fill="#7188a4" stroke="#b8c8d9" stroke-width="2"/>
+<path d="M131 263 L125 388 Q124 405 139 405 Q152 405 153 388 L170 300 L187 388 Q188 405 201 405 Q216 405 215 388 L209 263Z" fill="#7188a4" stroke="#b8c8d9" stroke-width="2"/>
+<path d="M150 91 L150 110 L190 110 L190 91" fill="#b8c8d9"/>
+<!-- nervous -->
+<g class="layer" data-layer="nervoso">
+<path class="part" data-id="cerebro" tabindex="0" role="button" aria-label="Cérebro" d="M151 41 Q140 26 151 20 Q161 14 169 24 Q179 14 190 25 Q201 38 187 48 Q176 56 168 48 Q158 54 151 41Z" fill="#c99cf3"/>
+<path class="part" data-id="medula" tabindex="0" role="button" aria-label="Medula espinhal" d="M167 72 L173 72 L174 244 L168 244Z" fill="#f4d35e"/>
+</g>
+<!-- respiratory -->
+<g class="layer" data-layer="respiratorio">
+<path class="part" data-id="traqueia" tabindex="0" role="button" aria-label="Traqueia" d="M166 103 L174 103 L174 137 L166 137Z" fill="#f5d7a1"/>
+<path class="part" data-id="pulmoes" tabindex="0" role="button" aria-label="Pulmões" d="M158 126 Q137 112 128 143 L121 176 Q124 193 144 179 L160 153Z M182 126 Q203 112 212 143 L219 176 Q216 193 196 179 L180 153Z" fill="#ff839d"/>
+</g>
+<!-- circulatory -->
+<g class="layer" data-layer="circulatorio">
+<path class="part" data-id="coracao" tabindex="0" role="button" aria-label="Coração" d="M170 154 C155 136 137 149 146 166 L170 190 L194 166 C203 149 185 136 170 154Z" fill="#ff4f68"/>
+<path d="M170 183 L170 233 M170 183 L151 161 M170 183 L189 161" stroke="#ffb1bd" stroke-width="4" fill="none" pointer-events="none"/>
+</g>
+<!-- digestive -->
+<g class="layer" data-layer="digestorio">
+<path class="part" data-id="figado" tabindex="0" role="button" aria-label="Fígado" d="M132 197 Q157 183 180 198 L179 218 Q153 229 131 215Z" fill="#b97943"/>
+<path class="part" data-id="estomago" tabindex="0" role="button" aria-label="Estômago" d="M184 199 Q205 190 204 209 Q207 224 189 234 Q173 236 176 219 Q177 209 184 199Z" fill="#ffad55"/>
+<path class="part" data-id="intestino" tabindex="0" role="button" aria-label="Intestinos" d="M139 235 Q170 225 201 235 L199 261 Q188 271 170 263 Q151 271 139 259Z" fill="#f5db5e"/>
+<path d="M148 241 Q157 234 168 243 Q179 235 191 243 M148 253 Q158 245 169 254 Q181 245 191 254" stroke="#ad7b23" stroke-width="3" fill="none" pointer-events="none"/>
+<path class="part" data-id="pancreas" tabindex="0" role="button" aria-label="Pâncreas" d="M157 225 Q174 216 190 226 L187 232 Q172 237 157 231Z" fill="#dba3fa"/>
+</g>
+<!-- urinary -->
+<g class="layer" data-layer="urinario">
+<path class="part" data-id="rins" tabindex="0" role="button" aria-label="Rins" d="M133 212 Q116 204 116 222 Q120 238 135 230 Q143 222 133 212Z M207 212 Q224 204 224 222 Q220 238 205 230 Q197 222 207 212Z" fill="#d87886"/>
+<path class="part" data-id="bexiga" tabindex="0" role="button" aria-label="Bexiga" d="M158 278 Q170 267 182 278 Q185 295 170 299 Q155 295 158 278Z" fill="#76c7ff"/>
+</g>
+<!-- endocrine -->
+<g class="layer" data-layer="endocrino">
+<path class="part" data-id="tireoide" tabindex="0" role="button" aria-label="Tireoide" d="M162 99 Q154 91 157 104 Q161 112 169 105 Q177 112 181 104 Q184 91 176 99 L170 105Z" fill="#7ce0b2"/>
+<circle class="part" data-id="hipofise" tabindex="0" role="button" aria-label="Hipófise" cx="170" cy="42" r="4" fill="#7ce0b2"/>
+<path class="part" data-id="suprarrenais" tabindex="0" role="button" aria-label="Glândulas suprarrenais" d="M126 207 L139 204 L138 209 L126 212Z M201 204 L214 207 L214 212 L202 209Z" fill="#7ce0b2"/>
+</g>
+<!-- reproductive -->
+<g class="layer" data-layer="reprodutor">
+<path class="part" data-id="utero" tabindex="0" role="button" aria-label="Útero (anatomia típica feminina)" d="M158 306 Q170 298 182 306 L180 322 Q170 332 160 322Z" fill="#e6a1d6"/>
+<path class="part" data-id="testiculos" tabindex="0" role="button" aria-label="Testículos (anatomia típica masculina)" d="M159 319 Q148 327 157 337 Q165 341 168 331 L170 322Z M181 319 Q192 327 183 337 Q175 341 172 331 L170 322Z" fill="#a9d7ff"/>
+</g>
+<!-- musculoskeletal -->
+<g class="layer" data-layer="musculoesqueletico">
+<path class="part" data-id="esqueleto" tabindex="0" role="button" aria-label="Esqueleto" d="M155 111 L185 111 L185 115 L155 115Z M151 121 L189 121 L189 125 L151 125Z M151 132 L189 132 L189 136 L151 136Z M151 143 L189 143 L189 147 L151 147Z M153 195 L187 195 L187 199 L153 199Z M153 207 L187 207 L187 211 L153 211Z M153 219 L187 219 L187 223 L153 223Z" fill="#fff1c9"/>
+</g>
+<g fill="#edf5ff" font-size="9" font-weight="700" pointer-events="none"><text x="205" y="51">Cabeça</text><text x="220" y="128">Tórax</text><text x="213" y="246">Abdômen</text><text x="220" y="294">Pelve</text></g>
+</svg>
+</div><div class="note">Importante: o mapa é esquemático, não está em escala e não representa todos os detalhes anatômicos. Algumas estruturas dependem da anatomia individual.</div>
+<div class="stats"><div class="stat"><strong id="countParts">0</strong><span class="muted">estruturas</span></div><div class="stat"><strong id="countSystems">0</strong><span class="muted">sistemas</span></div><div class="stat"><strong>3D? Não</strong><span class="muted">ilustração 2D</span></div></div>
+</section>
+<section class="panel detail" aria-live="polite">
+<h2>📖 Ficha de estudo</h2><div id="detail"><span class="tag">Comece explorando</span><h3>Bem-vindo ao atlas</h3><p>Selecione uma camada anatômica e toque numa estrutura do desenho ou pesquise no catálogo.</p><ul><li>Veja o sistema ao qual pertence.</li><li>Leia sua função e características.</li><li>Use o catálogo para encontrar estruturas que não aparecem no mapa.</li></ul></div>
+<div class="chips" id="detailChips"></div>
+</section>
+<section class="panel wide">
+<h2>🧭 Explorar por sistema</h2><p class="muted">Cada sistema reúne estruturas que trabalham em conjunto. Selecione um para filtrar o catálogo e destacar sua camada.</p><div class="systems" id="systems"></div>
+<div class="filters"><input id="search" type="search" placeholder="Pesquisar órgão ou função…"><select id="filter"><option value="todos">Todos os sistemas</option></select></div>
+<div class="catalog" id="catalog"></div>
+</section>
+<section class="panel wide">
+<div class="quizgrid"><div><h2>🎯 Quiz de biologia</h2><p class="muted">Teste o que aprendeu. Cada resposta correta vale um ponto.</p></div><div><strong>⭐ <span id="score">0</span> pontos</strong><div class="muted">Questão <span id="qindex">1</span>/<span id="qtotal">12</span></div></div></div>
+<div class="progress"><span id="progress"></span></div><div id="question" style="font-size:1.12rem;font-weight:800;margin:14px 0">Carregando pergunta…</div><div class="answers" id="answers"></div><div class="feedback" id="feedback" aria-live="polite"></div><button class="primary" id="next">Próxima pergunta →</button> <button id="reset">Recomeçar quiz</button>
+</section>
+</div>
+<div class="footer">Conteúdo educativo para estudo escolar. Não substitui livro didático, professor ou orientação médica.</div>
+<script>
+const systems={
+nervoso:{name:"Sistema nervoso",color:"#c99cf3",desc:"Recebe informações, interpreta estímulos e coordena respostas, movimentos, memória e muitas funções do corpo."},
+respiratorio:{name:"Sistema respiratório",color:"#ff839d",desc:"Realiza a ventilação e as trocas de oxigênio e gás carbônico entre o ar e o sangue."},
+circulatorio:{name:"Sistema cardiovascular",color:"#ff4f68",desc:"Coração, sangue e vasos transportam gases, nutrientes, hormônios e resíduos pelo organismo."},
+digestorio:{name:"Sistema digestório",color:"#f5db5e",desc:"Digere alimentos, absorve nutrientes e água e participa da eliminação de resíduos."},
+urinario:{name:"Sistema urinário",color:"#76c7ff",desc:"Filtra o sangue, forma e elimina a urina e ajuda a equilibrar água, sais e pH."},
+endocrino:{name:"Sistema endócrino",color:"#7ce0b2",desc:"Glândulas produzem hormônios que regulam crescimento, metabolismo, reprodução e outras funções."},
+reprodutor:{name:"Sistema reprodutor",color:"#e6a1d6",desc:"Produz células reprodutivas e hormônios sexuais; suas estruturas variam conforme a anatomia individual."},
+musculoesqueletico:{name:"Sistemas muscular e esquelético",color:"#fff1c9",desc:"O esqueleto sustenta e protege; músculos e tendões permitem movimento e ajudam a manter a postura."},
+tegumentar:{name:"Sistema tegumentar",color:"#f0b38c",desc:"Pele, pelos, unhas e glândulas formam uma barreira protetora e ajudam a regular a temperatura."},
+imunologico:{name:"Sistema imunológico/linfático",color:"#9ce2d5",desc:"Ajuda a defender o organismo e a transportar linfa; inclui vasos, linfonodos, baço e timo."}
+};
+const organs=[
+{id:"cerebro",name:"Cérebro",sys:"nervoso",where:"Crânio",fn:"Processa informações sensoriais, participa do pensamento, da memória, da linguagem, das emoções e dos movimentos voluntários.",facts:["Faz parte do encéfalo, protegido pelo crânio.","Comunica-se por redes de neurônios.","Trabalha junto ao cerebelo, tronco encefálico e medula espinhal."],map:true},
+{id:"medula",name:"Medula espinhal",sys:"nervoso",where:"Canal vertebral",fn:"Transmite sinais entre o encéfalo e muitas partes do corpo e participa de reflexos.",facts:["É protegida pelas vértebras e membranas chamadas meninges.","Faz parte do sistema nervoso central."],map:true},
+{id:"hipofise",name:"Hipófise",sys:"endocrino",where:"Base do cérebro",fn:"Libera hormônios que regulam outras glândulas e funções como crescimento e reprodução.",facts:["É ligada ao hipotálamo.","Nem todos os hormônios são produzidos nela; alguns são armazenados e liberados por ela."],map:true},
+{id:"pulmoes",name:"Pulmões",sys:"respiratorio",where:"Tórax",fn:"Permitem a troca de gases: o oxigênio entra no sangue e o gás carbônico é eliminado na expiração.",facts:["Os alvéolos são pequenos sacos onde ocorre a troca gasosa.","O diafragma ajuda a movimentar o ar.","O pulmão direito geralmente tem três lobos e o esquerdo dois."],map:true},
+{id:"traqueia",name:"Traqueia",sys:"respiratorio",where:"Pescoço e tórax",fn:"Conduz o ar da laringe até os brônquios.",facts:["Possui anéis de cartilagem que ajudam a mantê-la aberta.","Muco e cílios ajudam a remover partículas."],map:true},
+{id:"coracao",name:"Coração",sys:"circulatorio",where:"Tórax, entre os pulmões",fn:"Bombeia o sangue para os pulmões e para o restante do corpo.",facts:["Tem quatro cavidades: dois átrios e dois ventrículos.","Válvulas ajudam o sangue a fluir na direção correta.","O lado direito envia sangue aos pulmões; o esquerdo ao corpo."],map:true},
+{id:"figado",name:"Fígado",sys:"digestorio",where:"Parte superior direita do abdômen",fn:"Produz bile, processa nutrientes, armazena energia e transforma diversas substâncias.",facts:["É um dos maiores órgãos internos.","A bile ajuda na digestão das gorduras.","Tem funções metabólicas e de processamento de substâncias."],map:true},
+{id:"estomago",name:"Estômago",sys:"digestorio",where:"Parte superior do abdômen",fn:"Armazena e mistura temporariamente o alimento com ácido e enzimas, iniciando a digestão de proteínas.",facts:["O revestimento protege a parede do ácido.","O alimento parcialmente digerido segue para o intestino delgado."],map:true},
+{id:"intestino",name:"Intestinos",sys:"digestorio",where:"Abdômen",fn:"O intestino delgado absorve a maior parte dos nutrientes; o intestino grosso absorve água e ajuda a formar as fezes.",facts:["Incluem intestino delgado e intestino grosso.","As vilosidades aumentam a área de absorção.","A microbiota intestinal participa de processos importantes."],map:true},
+{id:"pancreas",name:"Pâncreas",sys:"digestorio",where:"Atrás do estômago",fn:"Produz enzimas digestivas e hormônios como insulina e glucagon, que ajudam a regular a glicose no sangue.",facts:["Tem funções digestivas e endócrinas.","A insulina ajuda a controlar a glicose sanguínea."],map:true},
+{id:"rins",name:"Rins",sys:"urinario",where:"Parte posterior do abdômen",fn:"Filtram o sangue, formam urina e ajudam a controlar água, sais e pressão arterial.",facts:["A maioria das pessoas tem dois rins.","Néfrons são unidades microscópicas funcionais.","Os ureteres levam a urina dos rins à bexiga."],map:true},
+{id:"bexiga",name:"Bexiga urinária",sys:"urinario",where:"Pelve",fn:"Armazena temporariamente a urina antes de sua eliminação pela uretra.",facts:["É um órgão muscular expansível.","Recebe urina dos ureteres."],map:true},
+{id:"tireoide",name:"Tireoide",sys:"endocrino",where:"Parte anterior do pescoço",fn:"Produz hormônios que influenciam o metabolismo, crescimento e desenvolvimento.",facts:["Precisa de iodo para produzir hormônios tireoidianos.","A atividade é regulada por sinais hormonais."],map:true},
+{id:"suprarrenais",name:"Glândulas suprarrenais",sys:"endocrino",where:"Acima dos rins",fn:"Produzem hormônios como cortisol, aldosterona e adrenalina, envolvidos em estresse, pressão e equilíbrio de sais.",facts:["Há uma glândula sobre cada rim.","Possuem regiões com funções diferentes."],map:true},
+{id:"utero",name:"Útero",sys:"reprodutor",where:"Pelve, na anatomia típica feminina",fn:"É o órgão onde um embrião pode se implantar e se desenvolver durante a gestação.",facts:["A camada interna chama-se endométrio.","A anatomia e as experiências reprodutivas variam entre pessoas."],map:true},
+{id:"testiculos",name:"Testículos",sys:"reprodutor",where:"Escroto, na anatomia típica masculina",fn:"Produzem espermatozoides e hormônios como a testosterona.",facts:["A produção de espermatozoides ocorre em túbulos seminíferos.","A anatomia varia de pessoa para pessoa."],map:true},
+{id:"esqueleto",name:"Esqueleto",sys:"musculoesqueletico",where:"Por todo o corpo",fn:"Dá sustentação, protege órgãos, ajuda no movimento e abriga medula óssea que produz células do sangue.",facts:["O esqueleto adulto típico tem cerca de 206 ossos, com variações individuais.","O osso é um tecido vivo.","Articulações conectam ossos."],map:true},
+{id:"pele",name:"Pele",sys:"tegumentar",where:"Superfície do corpo",fn:"Protege contra agentes externos, reduz perda de água, percebe estímulos e ajuda a regular a temperatura.",facts:["É o maior órgão do corpo por área.","Possui camadas e estruturas como glândulas sudoríparas."],map:false},
+{id:"baço",name:"Baço",sys:"imunologico",where:"Parte superior esquerda do abdômen",fn:"Filtra o sangue, remove células sanguíneas envelhecidas e participa das respostas imunológicas.",facts:["Faz parte do sistema linfático.","Não é o mesmo órgão que os linfonodos."],map:false},
+{id:"linfonodos",name:"Linfonodos",sys:"imunologico",where:"Distribuídos pelo sistema linfático",fn:"Filtram a linfa e ajudam células de defesa a reconhecer agentes estranhos.",facts:["São encontrados em regiões como pescoço, axilas e virilhas.","Podem aumentar de tamanho durante algumas infecções."],map:false},
+{id:"vesicula",name:"Vesícula biliar",sys:"digestorio",where:"Abaixo do fígado",fn:"Armazena e concentra a bile produzida pelo fígado e a libera no intestino delgado.",facts:["Não produz bile; essa função é do fígado."],map:false},
+{id:"esofago",name:"Esôfago",sys:"digestorio",where:"Pescoço e tórax",fn:"Transporta alimento e líquidos da faringe até o estômago por movimentos musculares.",facts:["Os movimentos são chamados peristaltismo."],map:false},
+{id:"laringe",name:"Laringe",sys:"respiratorio",where:"Pescoço",fn:"Conduz o ar e abriga as pregas vocais, importantes para a produção da voz.",facts:["A epiglote ajuda a proteger a entrada das vias respiratórias durante a deglutição."],map:false},
+{id:"bracos",name:"Músculos esqueléticos",sys:"musculoesqueletico",where:"Distribuídos pelo corpo",fn:"Produzem movimentos, mantêm a postura e geram calor.",facts:["Em geral, músculos esqueléticos movem ossos por meio de tendões.","O corpo também possui músculo liso e músculo cardíaco."],map:false},
+{id:"peleunhas",name:"Pelos e unhas",sys:"tegumentar",where:"Pele",fn:"Pelos ajudam na sensibilidade e proteção; unhas protegem as pontas dos dedos e auxiliam em tarefas finas.",facts:["São estruturas do sistema tegumentar."],map:false},
+{id:"timo",name:"Timo",sys:"imunologico",where:"Parte superior do tórax",fn:"Participa da maturação de certos linfócitos T, importantes para a imunidade.",facts:["É mais ativo durante a infância e muda com a idade."],map:false},
+{id:"ovarios",name:"Ovários",sys:"reprodutor",where:"Pelve, na anatomia típica feminina",fn:"Produzem óvulos e hormônios como estrogênio e progesterona.",facts:["A anatomia reprodutiva varia entre indivíduos."],map:false},
+{id:"prostata",name:"Próstata",sys:"reprodutor",where:"Abaixo da bexiga, na anatomia típica masculina",fn:"Produz parte do líquido que compõe o sêmen.",facts:["Envolve parte da uretra."],map:false},
+{id:"ureteres",name:"Ureteres e uretra",sys:"urinario",where:"Entre rins, bexiga e exterior",fn:"Os ureteres conduzem urina dos rins à bexiga; a uretra conduz a urina para fora do corpo.",facts:["São estruturas diferentes com funções diferentes."],map:false}
+];
+const $=id=>document.getElementById(id);let activeLayer="digestorio",selected=null;
+$("countParts").textContent=organs.length;$("countSystems").textContent=Object.keys(systems).length;
+function selectOrgan(id){const o=organs.find(x=>x.id===id);if(!o)return;selected=id;document.querySelectorAll(".part").forEach(e=>e.classList.toggle("sel",e.dataset.id===id));const s=systems[o.sys];$("detail").innerHTML=`<span class="tag">${s.name}</span><h3>${o.name}</h3><p><strong>Localização:</strong> ${o.where}</p><p><strong>Função:</strong> ${o.fn}</p><strong>Características</strong><ul>${o.facts.map(x=>`<li>${x}</li>`).join("")}</ul><p class="muted"><strong>Sobre o sistema:</strong> ${s.desc}</p>`;$("detailChips").innerHTML=`<span class="chip">📍 ${o.where}</span><span class="chip">🧩 ${s.name}</span>`}
+function setLayer(key){activeLayer=key;document.querySelectorAll(".layer").forEach(g=>g.style.display=(key==="todos"||g.dataset.layer===key)?"":"none");document.querySelectorAll("#layers button").forEach(b=>b.classList.toggle("active",b.dataset.layer===key));if(key!=="todos"&&systems[key]){$("filter").value=key;renderCatalog()}}
+$("layers").innerHTML=Object.entries(systems).filter(([k])=>document.querySelector(`[data-layer="${k}"]`)).map(([k,s])=>`<button class="btn ${k===activeLayer?'active':''}" data-layer="${k}">${s.name.replace("Sistema ","")}</button>`).join("")+`<button class="btn" data-layer="todos">Todas as camadas</button>`;
+$("layers").querySelectorAll("button").forEach(b=>b.onclick=()=>setLayer(b.dataset.layer));
+$("systems").innerHTML=Object.entries(systems).map(([k,s])=>`<button class="systembtn" style="border:1px solid ${s.color};color:${s.color};background:#0c1727" data-sys="${k}">${s.name}</button>`).join("");
+$("systems").querySelectorAll("button").forEach(b=>b.onclick=()=>{$("filter").value=b.dataset.sys;setLayer(document.querySelector(`[data-layer="${b.dataset.sys}"]`)?b.dataset.sys:"todos");renderCatalog()});
+$("filter").innerHTML='<option value="todos">Todos os sistemas</option>'+Object.entries(systems).map(([k,s])=>`<option value="${k}">${s.name}</option>`).join("");
+function renderCatalog(){const q=$("search").value.toLowerCase().trim(),f=$("filter").value;const arr=organs.filter(o=>(f==="todos"||o.sys===f)&&(`${o.name} ${o.fn} ${o.where} ${systems[o.sys].name}`.toLowerCase().includes(q)));$("catalog").innerHTML=arr.map(o=>`<button class="item" data-item="${o.id}"><strong>${o.name}</strong><small>${systems[o.sys].name} · ${o.where}</small></button>`).join("")||'<p class="muted">Nenhuma estrutura encontrada. Tente outra pesquisa.</p>';$("catalog").querySelectorAll("[data-item]").forEach(b=>b.onclick=()=>selectOrgan(b.dataset.item))}
+$("search").addEventListener("input",renderCatalog);$("filter").onchange=()=>{const v=$("filter").value;setLayer(document.querySelector(`[data-layer="${v}"]`)?v:"todos");renderCatalog()};
+document.querySelectorAll(".part").forEach(e=>{e.addEventListener("click",()=>selectOrgan(e.dataset.id));e.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();selectOrgan(e.dataset.id)}})});
+renderCatalog();
+const questions=[
+{q:"Qual órgão bombeia o sangue?",a:["Coração","Fígado","Bexiga","Baço"],c:0,w:"O coração bombeia sangue para os pulmões e para o restante do corpo."},
+{q:"Onde acontece a maior parte da absorção de nutrientes?",a:["Estômago","Intestino delgado","Esôfago","Bexiga"],c:1,w:"A maior parte dos nutrientes é absorvida no intestino delgado."},
+{q:"Qual é a principal função dos rins?",a:["Produzir bile","Filtrar o sangue e formar urina","Bombear sangue","Produzir voz"],c:1,w:"Os rins filtram o sangue e ajudam a equilibrar água e sais."},
+{q:"Qual estrutura conduz o ar até os brônquios?",a:["Traqueia","Ureter","Esôfago","Intestino"],c:0,w:"A traqueia faz parte das vias respiratórias."},
+{q:"Qual órgão produz a bile?",a:["Vesícula biliar","Fígado","Pâncreas","Estômago"],c:1,w:"O fígado produz a bile; a vesícula biliar a armazena."},
+{q:"Qual estrutura armazena a urina?",a:["Rim","Ureter","Bexiga","Fígado"],c:2,w:"A bexiga armazena temporariamente a urina."},
+{q:"Qual órgão coordena memória e muitos movimentos voluntários?",a:["Cérebro","Pulmão","Pâncreas","Baço"],c:0,w:"O cérebro participa do pensamento, memória, sentidos e movimentos."},
+{q:"Qual sistema produz hormônios?",a:["Endócrino","Respiratório","Tegumentar apenas","Esquelético apenas"],c:0,w:"O sistema endócrino inclui glândulas que liberam hormônios."},
+{q:"Que órgão participa da defesa e filtra o sangue?",a:["Baço","Estômago","Bexiga","Traqueia"],c:0,w:"O baço remove algumas células sanguíneas envelhecidas e participa da imunidade."},
+{q:"Qual é a função principal dos pulmões?",a:["Produzir insulina","Trocar oxigênio e gás carbônico","Filtrar urina","Armazenar bile"],c:1,w:"As trocas gasosas ocorrem nos alvéolos pulmonares."},
+{q:"Qual órgão produz insulina?",a:["Pâncreas","Coração","Traqueia","Baço"],c:0,w:"O pâncreas produz insulina, que ajuda a regular a glicose sanguínea."},
+{q:"Qual estrutura protege o cérebro?",a:["Costelas","Crânio","Pelve","Escápula"],c:1,w:"O crânio envolve e protege o encéfalo."}
+];let qi=0,score=0,done=false,order=[];
+function startQuiz(){order=questions.map((_,i)=>i).sort(()=>Math.random()-.5);qi=0;score=0;done=false;$("score").textContent=0;renderQ()}
+function renderQ(){done=false;let q=questions[order[qi]];$("qindex").textContent=qi+1;$("qtotal").textContent=order.length;$("progress").style.width=(qi/order.length*100)+"%";$("question").textContent=q.q;$("feedback").textContent="";$("answers").innerHTML=q.a.map((a,i)=>`<button data-a="${i}">${a}</button>`).join("");$("answers").querySelectorAll("button").forEach(b=>b.onclick=()=>answer(+b.dataset.a,b));$("next").textContent=qi===order.length-1?"Finalizar rodada ↻":"Próxima pergunta →"}
+function answer(i,b){if(done)return;done=true;let q=questions[order[qi]];$("answers").querySelectorAll("button").forEach((el,j)=>{el.disabled=true;if(j===q.c)el.classList.add("good")});if(i===q.c){score++;$("score").textContent=score;$("feedback").textContent="Correto! "+q.w}else{b.classList.add("bad");$("feedback").textContent="Resposta correta: "+q.a[q.c]+". "+q.w}}
+function nextQuestion(){if(qi===order.length-1){$("progress").style.width="100%";$("question").textContent=`Rodada concluída: ${score} de ${order.length} pontos!`;$("answers").innerHTML="";$("feedback").textContent=score>=10?"Excelente! Você conhece bem os sistemas do corpo.":"Boa prática! Recomece para reforçar o que aprendeu.";$("next").textContent="Jogar novamente ↻";return}qi++;renderQ()}
+$("next").onclick=nextQuestion;
+$("reset").onclick=()=>{startQuiz()};
+startQuiz();
+</script>
+</body></html>
